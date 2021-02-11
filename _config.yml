@@ -1,7 +1,6 @@
 description: >-
-    Write an awesome description for your new site here. You can edit this
-      line in _config.yml. It will appear in your document head meta (for
-        Google search results) and in your feed.xml site description.
+  Here you will see each step of the RSA algorithm with the formulas and a message
+  being encrypted and decrypted in real time.
 baseurl: ""
 github_username: JohnLapis
 markdown: kramdown
