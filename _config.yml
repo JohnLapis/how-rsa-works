@@ -6,4 +6,4 @@ description: >-
 baseurl: ""
 github_username: JohnLapis
 markdown: kramdown
-theme: null
+theme: jekyll-theme-slate
