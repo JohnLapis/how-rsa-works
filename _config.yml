@@ -5,3 +5,6 @@ baseurl: ""
 github_username: JohnLapis
 markdown: kramdown
 theme: jekyll-theme-slate
+exclude:
+  - src
+  - node_modules
