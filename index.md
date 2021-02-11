@@ -1,5 +1,6 @@
 ---
 layout: default
+title: title of main page
 ---
 ## that's the title of the page {#root}
 
