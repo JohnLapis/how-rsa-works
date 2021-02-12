@@ -2,7 +2,7 @@
 layout: default
 title: title of main page
 ---
-{% include mathjax_support.html %}
+{% include mathjax.html %}
 ## that's the title of the page {#root}
 
 ### encryption {#section-1}
