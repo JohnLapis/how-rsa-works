@@ -1,18 +1,16 @@
 ---
-layout: default
+layout: my_default
 title: title of main page
 ---
 {% include mathjax.html %}
 
 ## that's the title of the page
 
-<div id="section-1" markdown="1">
+<div id="slides" style="display: none;">
+<div markdown="1" class="slide">
 
 ### encryption
 
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
 part 1
 part 1
@@ -29,7 +27,7 @@ part 1
 
 </div>
 
-<div id="section-2" markdown="1">
+<div markdown="1" class="slide">
 
 ### decryption
 
@@ -49,14 +47,12 @@ Test a display math with equation number:
 \end{equation}
 Is it O.K.?
 
-Test a display math with equation number:
-$$
-  \begin{align}
-    |\psi_1\rangle &= a|0\rangle + b|1\rangle \\\\
-    |\psi_2\rangle &= c|0\rangle + d|1\rangle
-  \end{align}
-$$
-Is it O.K.?
+</div>
+</div>
+
+<div id="temp-root">
+
+default default default default
 
 </div>
 
