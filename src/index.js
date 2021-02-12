@@ -8,5 +8,5 @@ ReactDOM.render(
     <App />
     {/* <TodoList />, */}
   </React.StrictMode>,
-  document.querySelector('#temp-root')
+  document.querySelector('#root')
 );

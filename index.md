@@ -1,7 +1,8 @@
 ---
-layout: my_default
+layout: default
 title: title of main page
 ---
+{% include bootstrap.html %}
 {% include mathjax.html %}
 
 ## that's the title of the page
@@ -50,7 +51,7 @@ Is it O.K.?
 </div>
 </div>
 
-<div id="temp-root">
+<div id="root">
 
 default default default default
 
