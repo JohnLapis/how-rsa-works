@@ -6,29 +6,32 @@ title: title of main page
 
 ## that's the title of the page
 
-<section id="section-1" class="inner|outer">
+<div id="section-1" markdown="1">
 
 ### encryption
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
-part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
-part 1
-part 1
-part 1
-</section>
 
-<section id="section-1" class="inner|outer">
-### decryption {#section-2}
+part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
+part 1
+part 1
+part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
+part 1
+part 1
+part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
+part 1
+part 1
+part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
+part 1
+part 1
+part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
+part 1
+part 1
+part 1
+
+</div>
+
+<div id="section-2" markdown="1">
+
+### decryption
 
 Let's test some inline math $x$, $y$, $x_1$, $y_1$.
 
@@ -55,6 +58,6 @@ $$
 $$
 Is it O.K.?
 
-</section>
+</div>
 
 {% include react_app.html %}
