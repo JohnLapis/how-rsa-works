@@ -3,9 +3,12 @@ layout: default
 title: title of main page
 ---
 {% include mathjax.html %}
-## that's the title of the page {#root}
 
-### encryption {#section-1}
+## that's the title of the page
+
+<section id="section-1" class="inner|outer">
+
+### encryption
 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1
 part 1
 part 1
@@ -22,6 +25,9 @@ part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 part 1 par
 part 1
 part 1
 part 1
+</section>
+
+<section id="section-1" class="inner|outer">
 ### decryption {#section-2}
 
 Let's test some inline math $x$, $y$, $x_1$, $y_1$.
@@ -48,3 +54,7 @@ $$
   \end{align}
 $$
 Is it O.K.?
+
+</section>
+
+{% include react_app.html %}
