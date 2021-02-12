@@ -1,0 +1,11 @@
+# jekyll files
+_site/
+.sass-cache/
+_sass/
+.jekyll-cache/
+.jekyll-metadata
+
+
+# js files
+/config/
+/node_modules/
