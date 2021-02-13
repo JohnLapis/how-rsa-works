@@ -1,10 +1,2 @@
-description: >-
-  Here you will see each step of the RSA algorithm with the formulas and a message
-  being encrypted and decrypted in real time.
-baseurl: ""
-github_username: JohnLapis
-markdown: kramdown
 theme: jekyll-theme-slate
-exclude:
-  - src
-  - node_modules
+markdown: kramdown
