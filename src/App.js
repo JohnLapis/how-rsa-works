@@ -6,7 +6,7 @@ function App() {
     document.querySelectorAll('#slides .slide')
   ).map((slide) => slide.innerHTML);
   return (
-    <div className="App container">
+    <div className="App">
       <Carousel
         interval={null}
         nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" />}
