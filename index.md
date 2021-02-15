@@ -28,14 +28,14 @@ $n =$ <input id="n" type="text">
 </div>
 
 <div class="col-6" markdown="1">
- ```javascript
+```javascript
 let oi = `
 ?*box showing the code*?
 ?                      ?
 ?                      ?
 ?                      ?
 `
- ```
+```
 </div>
 </div>
 
@@ -50,17 +50,17 @@ $e$ must be an integer such that $1 < e < \phi(n)$ and $gcd(e, \phi(n)) = 1$, i.
 <div class="row">
 <div class="col-6" markdown="1">
 <button class="btn btn-outline-success my-3">Generate $e$</button> \\
-$e =$ <input id="p" type="text">
+$e =$ <input id="e" type="text">
 </div>
 
 <div class="col-6" markdown="1">
- ```javascript
+```javascript
  this.isCode()
  let very_random = "this code"
  if (!very_random) {
    console.assert(false)
  }
- ```
+```
 </div>
 </div>
 
@@ -71,18 +71,18 @@ Now we calculate the value of $d$. Because $d$ is the multiplicative inverse of 
 <div class="row">
 <div class="col-6" markdown="1">
 <button class="btn btn-outline-success my-3">Calculate $d$</button> \\
-$d =$ <input id="p" type="text">
+$d =$ <input id="d" type="text">
 </div>
 
 <div class="col-6" markdown="1">
- ```javascript
+```javascript
 let oi = `
 ?*box showing the code*?
 ?                      ?
 ?                      ?
 ?                      ?
 `
- ```
+```
 </div>
 </div>
 
@@ -92,6 +92,38 @@ The private key is the pair $(d, n)$.
 
 <div class="slide" markdown="1">
 ## Encryption
+
+<button class="btn btn-info">Copy public key to clipboard</button>
+<button class="btn btn-info mb-2">Copy private key to clipboard</button>
+
+You can input a message you want to be encrypted in the box below.
+
+<textarea class="form-control" aria-label="With textarea">Hello, World!</textarea>
+
+The function to encrypt a message $m$, also called plaintext, into a ciphertext $m'$ is
+
+<div class="row">
+<div class="col-6" markdown="1">
+$$
+encrypt(m) = m^e \bmod n = m'
+$$
+</div>
+
+<div class="col-6" markdown="1">
+```javascript
+function encrypt(plaintext, key) {
+  return (toNumber(plaintext) ** key.e) % key.n
+}
+```
+
+The function `toNumber` was called to convert the letters into numbers so that we can do arithmetic with it.
+</div>
+</div>
+
+</div>
+
+<div class="slide" markdown="1">
+## not encry
 
 Let's test some inline math $x$, $y$, $x_1$, $y_1$.
 

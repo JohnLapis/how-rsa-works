@@ -6,7 +6,12 @@ import TodoList from './TodoList';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <TodoList />, */}
   </React.StrictMode>,
   document.querySelector('#root')
 );
+
+setTimeout(() => {
+  const slidesContainer = document.querySelector('#slides');
+  window.s = slidesContainer;
+  slidesContainer.parentNode.removeChild(slidesContainer);
+}, 1000);
