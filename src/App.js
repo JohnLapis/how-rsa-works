@@ -4,7 +4,7 @@ import { Carousel } from 'react-bootstrap';
 function App() {
   const slides = Array.from(document.querySelectorAll('#slides .slide'));
   return (
-    <div className="App">
+    <div className="App container">
       <Carousel
         interval={null}
         nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" />}

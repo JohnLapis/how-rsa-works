@@ -19,10 +19,25 @@ $$
 
 $n$ is equal to the product of two distinct large primes $p$ and $q$.
 
-_generate primes_                                     ?*box showing the code*?
-$p =$ *box*                                             ?                      ?
-$q =$ *box*                                             ?                      ?
-$n =$ *aalal*                                           ?                      ?
+<div class="row">
+<div class="col-6" markdown="1">
+<button class="btn btn-outline-success my-3">Generate primes</button> \\
+$p =$ <input id="p" type="text"> \\
+$q =$ <input id="q" type="text"> \\
+$n =$ <input id="n" type="text">
+</div>
+
+<div class="col-6" markdown="1">
+ ```javascript
+let oi = `
+?*box showing the code*?
+?                      ?
+?                      ?
+?                      ?
+`
+ ```
+</div>
+</div>
 
 Before generating $e$, we must calculate $\phi(n)$. $\phi(x)$ is the totient function of $x$, which gives the number of primes less than $x$. By [Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem), we know that when $x$ is a product of two primes $a$ and $b$, $\phi(x) = (a-1)(b-1)$. So,
 
@@ -32,15 +47,47 @@ $$
 
 $e$ must be an integer such that $1 < e < \phi(n)$ and $gcd(e, \phi(n)) = 1$, i.e. $e$ is relatively prime to $\phi(n)$. The value of $e$ is usually equal to $e^{16} + 1 = 65,537$ since it's size doesn't influence a lot on security. Only the performance of encryption is affected if the bit-length of $e$ is too large.
 
-_generate e_ e = *box*                              ?*box showing the code*?
+<div class="row">
+<div class="col-6" markdown="1">
+<button class="btn btn-outline-success my-3">Generate $e$</button> \\
+$e =$ <input id="p" type="text">
+</div>
+
+<div class="col-6" markdown="1">
+ ```javascript
+ this.isCode()
+ let very_random = "this code"
+ if (!very_random) {
+   console.assert(false)
+ }
+ ```
+</div>
+</div>
 
 The public key is the pair $(e, n)$.
 
 Now we calculate the value of $d$. Because $d$ is the multiplicative inverse of $e$, we can calculate it using [Euclid's algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm), which sth, and choose the.
 
-_calculate d_ d = *box*                              ?*box showing each step*?
+<div class="row">
+<div class="col-6" markdown="1">
+<button class="btn btn-outline-success my-3">Calculate $d$</button> \\
+$d =$ <input id="p" type="text">
+</div>
+
+<div class="col-6" markdown="1">
+ ```javascript
+let oi = `
+?*box showing the code*?
+?                      ?
+?                      ?
+?                      ?
+`
+ ```
+</div>
+</div>
 
 The private key is the pair $(d, n)$.
+
 </div>
 
 <div class="slide" markdown="1">
