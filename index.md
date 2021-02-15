@@ -55,8 +55,8 @@ $e =$ <input id="e" class="w-75" type="text">
 
 <div class="col-lg-7" markdown="1">
 ```javascript
-function calculate_e(p, q) }
-  totient_of_n = (p - 1) * (q - 1)
+function calculate_e(p, q) {
+  const totient_of_n = (p - 1) * (q - 1)
   return random(1, totient_of_n - 1)
 }
 ```
@@ -76,8 +76,8 @@ $d =$ <input id="d" class="w-75" type="text">
 <div class="col-lg-7" markdown="1">
 ```javascript
 function calculate_d(e, p, q) {
-  totient_of_n = (p - 1) * (q - 1)
-  res = pulverizer(e, totient_of_n)
+  const totient_of_n = (p - 1) * (q - 1)
+  const res = pulverizer(e, totient_of_n)
   return res.algo
 }
 ```
@@ -172,8 +172,8 @@ An attacker already knows $e$ and $n$, why knowing $p$ and $q$ matters? $n$ is a
 
 ```javascript
 function calculate_d(e, p, q) {
-  totient_of_n = (p - 1) * (q - 1)
-  res = pulverizer(e, totient_of_n)
+  const totient_of_n = (p - 1) * (q - 1)
+  const res = pulverizer(e, totient_of_n)
   return res.algo
 }
 ```
@@ -185,6 +185,7 @@ function calculate_d(e, p, q) {
 ## That's it
 
 some postive message
+
 The javascript code used are available at [tanana](tan/src/rsa.js).
 
 </div>
