@@ -20,14 +20,14 @@ de \equiv 1 \pmod {\phi(n)}
 $n$ is equal to the product of two distinct large primes $p$ and $q$.
 
 <div class="row">
-<div class="col-6" markdown="1">
+<div class="col-lg-5" markdown="1">
 <button class="btn btn-outline-success my-3">Generate primes</button> \\
-$p =$ <input id="p" type="text"> \\
-$q =$ <input id="q" type="text"> \\
-$n =$ <input id="n" type="text">
+$p =$ <input id="p" class="w-75" type="text"> \\
+$q =$ <input id="q" class="w-75" type="text"> \\
+$n =$ <input id="n" class="w-75" type="text">
 </div>
 
-<div class="col-6" markdown="1">
+<div class="col-lg-7" markdown="1">
 ```javascript
 let oi = `
 ?*box showing the code*?
@@ -48,12 +48,12 @@ $\phi(x)$ is the totient function of $x$, which gives how many number coprimes w
 $e$ must be an integer such that $1 < e < \phi(n)$ and $gcd(e, \phi(n)) = 1$, i.e. $e$ and $\phi(n)$ are coprime. The value of $e$ is usually $2^{16} + 1 = 65,537$ since its size doesn't influence a lot on security. Only the performance of encryption is affected if the bit-length of $e$ is too large.
 
 <div class="row">
-<div class="col-6" markdown="1">
+<div class="col-lg-5" markdown="1">
 <button class="btn btn-outline-success my-3">Generate $e$</button> \\
-$e =$ <input id="e" type="text">
+$e =$ <input id="e" class="w-75" type="text">
 </div>
 
-<div class="col-6" markdown="1">
+<div class="col-lg-7" markdown="1">
 ```javascript
 function calculate_e(p, q) }
   totient_of_n = (p - 1) * (q - 1)
@@ -68,12 +68,12 @@ The public key is the pair $(e, n)$.
 Now we calculate the value of $d$. Since $d$ is the multiplicative inverse of $e$, we can calculate it using the [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm), aka pulverizer, which is seomthin different from Euclid's alg.
 
 <div class="row">
-<div class="col-6" markdown="1">
+<div class="col-lg-5" markdown="1">
 <button class="btn btn-outline-success my-3">Calculate $d$</button> \\
-$d =$ <input id="d" type="text">
+$d =$ <input id="d" class="w-75" type="text">
 </div>
 
-<div class="col-6" markdown="1">
+<div class="col-lg-7" markdown="1">
 ```javascript
 function calculate_d(e, p, q) {
   totient_of_n = (p - 1) * (q - 1)
@@ -104,13 +104,13 @@ You can input a message you want to be encrypted in the box below. \(Limit: 1000
 The function to encrypt a message $m$, also called plaintext, into a ciphertext $m'$ is
 
 <div class="row">
-<div class="col-6" markdown="1">
+<div class="col-lg-5" markdown="1">
 \begin{equation}
 encrypt(m) = m^e \bmod n = m'
 \end{equation}
 </div>
 
-<div class="col-6" markdown="1">
+<div class="col-lg-7" markdown="1">
 ```javascript
 function encrypt(plaintext, key) {
   const decodedPlaintext = decode(plaintext, "utf-8")
@@ -138,13 +138,13 @@ The function `decode` converts characters into numbers.
 The function to decrypt a ciphertext $m'$ into plaintext $m$ is
 
 <div class="row">
-<div class="col-6" markdown="1">
+<div class="col-lg-5" markdown="1">
 \begin{equation}
 decrypt(m') = (m')^d \bmod n = m
 \end{equation}
 </div>
 
-<div class="col-6" markdown="1">
+<div class="col-lg-7" markdown="1">
 ```javascript
 function decrypt(ciphertext, key) {
   const decodedCiphertext = (ciphertext ** key.d) % key.n
