@@ -9,22 +9,9 @@ function App() {
     <div className="App">
       <Carousel
         interval={null}
-        indicators={false}
+        indicators={true}
+        controls={false}
         touch={false}
-        prevIcon={<img
-                    src="/css/chevron-left.svg"
-                    alt="prev slide"
-                    className="position-fixed"
-                    width="50"
-                    height="75"
-                  />}
-        nextIcon={<img
-                      src="/css/chevron-right.svg"
-                      alt="next slide"
-                      className="position-fixed"
-                      width="50"
-                      height="75"
-                  />}
       >
         {slides.map((slide, id) => (
           <Carousel.Item
