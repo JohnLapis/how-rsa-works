@@ -125,6 +125,7 @@ The function `decode` converts characters into numbers.
 <button class="btn btn-outline-success">Encrypt message</button>
 <textarea id="ciphertext" class="w-100"></textarea>
 
+<br>
 </div>
 
 <div class="slide" markdown="1">
@@ -188,6 +189,7 @@ some postive message
 
 The javascript code used are available at [tanana](tan/src/rsa.js).
 
+<br>
 </div>
 </div>
 
