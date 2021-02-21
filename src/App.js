@@ -10,6 +10,7 @@ function App() {
       <Carousel
         interval={null}
         indicators={false}
+        touch={false}
         prevIcon={<img
                     src="/css/chevron-left.svg"
                     alt="prev slide"
