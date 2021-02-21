@@ -1,0 +1,7 @@
+ol.carousel-indicators > li {
+    background-color: darkred ;
+}
+
+ol.carousel-indicators > li.active {
+    background-color: black ;
+}
