@@ -17,11 +17,11 @@ To make it possible to encrypt and decrypt a message with different keys, they m
 de \equiv 1 \pmod {\phi(n)}
 \end{equation}
 
-$n$ is equal to the product of two distinct large primes $p$ and $q$.
+$n$ is equal to the product of two distinct large primes $p$ and $q$, and its size is between $$1024$ and $4096$ bits.
 
 <div class="row">
 <div class="col-lg-5" markdown="1">
-<button class="btn btn-outline-success my-3">Generate primes</button> \\
+<button onclick="setBaseNumbers" class="btn btn-outline-success my-3">Generate primes</button> \\
 $p =$ <input id="p" class="w-75" type="text"> \\
 $q =$ <input id="q" class="w-75" type="text"> \\
 $n =$ <input id="n" class="w-75" type="text">
@@ -29,12 +29,8 @@ $n =$ <input id="n" class="w-75" type="text">
 
 <div class="col-lg-7" markdown="1">
 ```javascript
-let oi = `
-?*box showing the code*?
-?                      ?
-?                      ?
-?                      ?
-`
+// This algorithm implements the Miler-Rabin primality test
+function generate_prime() {}
 ```
 </div>
 </div>
@@ -49,7 +45,7 @@ $e$ must be an integer such that $1 < e < \phi(n)$ and $gcd(e, \phi(n)) = 1$, i.
 
 <div class="row">
 <div class="col-lg-5" markdown="1">
-<button class="btn btn-outline-success my-3">Generate $e$</button> \\
+<button onclick="setPublicKey" class="btn btn-outline-success my-3">Generate $e$</button> \\
 $e =$ <input id="e" class="w-75" type="text">
 </div>
 
@@ -69,7 +65,7 @@ Now we calculate the value of $d$. Since $d$ is the multiplicative inverse of $e
 
 <div class="row">
 <div class="col-lg-5" markdown="1">
-<button class="btn btn-outline-success my-3">Calculate $d$</button> \\
+<button onclick="setPrivateKey" class="btn btn-outline-success my-3">Calculate $d$</button> \\
 $d =$ <input id="d" class="w-75" type="text">
 </div>
 
@@ -93,8 +89,8 @@ The private key is the pair $(d, n)$.
 ## Encryption
 
 <div class="mb-2">
-<button class="btn btn-info btn-sm">Copy public key to clipboard</button>
-<button class="btn btn-info btn-sm">Copy private key to clipboard</button>
+<button onclick="copyPublicKeyToClipboard" class="btn btn-info btn-sm">Copy public key to clipboard</button>
+<button onclick="copyPrivateKeyToClipboard" class="btn btn-info btn-sm">Copy private key to clipboard</button>
 </div>
 
 You can input a message you want to be encrypted in the box below. \(Limit: 1000 characters.\)
@@ -122,7 +118,7 @@ The function `decode` converts characters into numbers.
 </div>
 </div>
 
-<button class="btn btn-outline-success">Encrypt message</button>
+<button onclick="encryptPagePlaintext" lass="btn btn-outline-success">Encrypt message</button>
 <textarea id="ciphertext" class="w-100"></textarea>
 
 <br>
@@ -132,8 +128,8 @@ The function `decode` converts characters into numbers.
 ## Decryption
 
 <div class="mb-2">
-<button class="btn btn-info btn-sm">Copy public key to clipboard</button>
-<button class="btn btn-info btn-sm">Copy private key to clipboard</button>
+<button onclick="copyPublicKeyToClipboard" class="btn btn-info btn-sm">Copy public key to clipboard</button>
+<button onclick="copyPrivateKeyToClipboard" class="btn btn-info btn-sm">Copy private key to clipboard</button>
 </div>
 
 The function to decrypt a ciphertext $m'$ into plaintext $m$ is
@@ -157,7 +153,7 @@ The function `encode` converts numbers into characters.
 </div>
 </div>
 
-<button class="btn btn-outline-success">Decrypt message</button>
+<button onclick="decryptPagePlaintext" class="btn btn-outline-success">Decrypt message</button>
 <textarea id="decrypted-ciphertext" class="w-100 mb-4"></textarea>
 
 But what is secure about RSA that impedes attackers from decrypting your message? It is the assumed difficulty of factoring the prime numbers of $n$. Before we understand why it's difficult, let's see how an attacker could obtain the private key.
