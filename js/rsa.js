@@ -104,6 +104,44 @@ function setBaseNumbers() {
   document.querySelector('#n').value = p * q;
 }
 
+function pulverizer({ max, min }) {
+  /* Calculates gcd of max and min and returns when remainder equals stop.
+   *
+   * Based on a*x + b*y = gcd(max, min), the return object is {x, y, gcd}.
+   */
+  let [a, b] = [max, min];
+  // key = x*max - y*min
+  const combinations = { [max]: { x: 1, y: 0 }, [min]: { x: 0, y: 1 } };
+
+  while (true) {
+    // rem =  a - q*b
+    const q = Math.floor(a / b);
+    const rem = a % b;
+
+    if (rem === 0) {
+      // gcd(a,b) is the smallest linear combination of a and b
+      const lastComb = combinations[b];
+      return { gcd: b, x: lastComb.x, y: lastComb.y };
+    }
+
+    // rem = combOfA - q * combOfB
+    const combOfA = combinations[a];
+    const combOfB = combinations[b];
+
+    // rem = combOfA - q * (combOfB.x * max - combOfB.y * min)
+    // rem = combOfA - (b_x * max - b_y * min)
+    const b_x = q * combOfB.x;
+    const b_y = q * combOfB.y;
+
+    // rem = combOfA.x * max - combOfA.y * min - b_x * max + b_y * min
+    // rem = combOfA.x * max - b_x * max - combOfA.y * min + b_y * min
+    // rem = max * (combOfA.x - b_x) - min * (b_y - combOfA.y)
+    // rem = max * (combOfA.x - b_x) + min * (combOfA.y - b_y)
+    const combOfRem = { x: combOfA.x - b_x, y: combOfA.y - b_y };
+    combinations[rem] = combOfRem;
+    [a, b] = [b, rem];
+  }
+}
 
 function gcd({ max, min }) {
   if (min === 0) return max;
@@ -135,7 +173,9 @@ function setPublicKey() {
 
 function calculateDecryptionKey(e, p, q) {
   const totientOfN = (p - 1) * (q - 1);
-  return pulverizer({ max: totientOfN, min: e }).x;
+  // Since 1 = d*e - k*tot(n), pulverizer(tot(n), e) returns {gcd: 1, x: -k, y: d}
+  // tot(n) > e implies decryption key is y
+  return pulverizer({ max: totientOfN, min: e }).y;
 }
 
 function setPrivateKey() {
