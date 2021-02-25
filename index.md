@@ -62,7 +62,7 @@ function calculate_e(p, q) {
 
 The public key is the pair $(e, n)$.
 
-Now we calculate the value of $d$. Since $d$ is the multiplicative inverse of $e$, we can calculate it using the [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm), aka pulverizer, which is seomthin different from Euclid's alg.
+Now we calculate the value of $d$. Since $d$ is the multiplicative inverse of $e$, we can calculate it using the [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm), aka pulverizer, which returns the gcd and the numbers that satisfy smallest linear combination of $d$ and $e$.
 
 <div class="row">
 <div class="col-lg-5" markdown="1">
