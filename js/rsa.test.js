@@ -1,6 +1,8 @@
 import fs from 'fs';
+import fc from 'fast-check';
 import {
   isPrime,
+  generateKeys,
   coprime,
   generatePrime,
   randint,
@@ -24,11 +26,18 @@ it.each([
   expect(e).toEqual(expected);
 });
 
-it.each([
-
-])('calculateDecryptionKey', (e, p, q, expected) => {
-  const d = calculateDecryptionKey(e, p, q);
-  expect(d).toEqual(expected);
+it('decryption key should be multiplicative inverse of encryption key', () => {
+  fc.assert(fc.property(
+    fc.nat(2**14).filter((n) => isPrime(n)),
+    fc.nat(2**14).filter((n) => isPrime(n)),
+    (p, q) => {
+      fc.pre(p !== q);
+      const e = calculateEncryptionKey(p, q);
+      const d = calculateDecryptionKey(e, p, q);
+      const totientOfN = (p - 1) * (q - 1);
+      expect(((d * e) - 1) % totientOfN === 0).toBe(true);
+    },
+  ));
 });
 
 it.each([

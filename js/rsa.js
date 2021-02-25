@@ -1,6 +1,6 @@
 window = {};
-window.minKeySize = 2 ** 512;
-window.maxKeySize = 2 ** 1023; // some browser don't allow 2**1024
+window.minKeySize = 2 ** 10;
+window.maxKeySize = 2 ** 14; // MAX_SAFE_VALUE is 2 ** 53
 
 function isInt(n) {
   return Math.floor(n) - n === 0;
@@ -56,7 +56,7 @@ function isPrime(n) {
   if (n % 2 === 0) return false;
   if (n < 2) return false;
 
-  const rounds = n <= 40 ? n - 1 : 40; // myb 60
+  const rounds = n <= 40 ? n - 1 : 40;
 
   // n = 2**s * d + 1
   // n = 2 ** expOfTwo * rest + 1
@@ -95,12 +95,14 @@ function generatePrime({ min, max }) {
 }
 
 function setBaseNumbers() {
-  document.querySelector('#p').value = generatePrime(
-    { min: window.minKeySize, max: window.maxKeySize },
-  );
-  document.querySelector('#q').value = generatePrime(
-    { min: window.minKeySize, max: window.maxKeySize },
-  );
+  let p;
+  let q;
+  do {
+    p = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+    q = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+  } while (p === q);
+  document.querySelector('#p').value = p;
+  document.querySelector('#q').value = q;
   document.querySelector('#n').value = p * q;
 }
 
@@ -110,9 +112,8 @@ function pulverizer({ max, min }) {
    * Based on a*x + b*y = gcd(max, min), the return object is {x, y, gcd}.
    */
   let [a, b] = [max, min];
-  // key = x*max - y*min
+  // key = x*max + y*min
   const combinations = { [max]: { x: 1, y: 0 }, [min]: { x: 0, y: 1 } };
-
   while (true) {
     // rem =  a - q*b
     const q = Math.floor(a / b);
@@ -128,16 +129,15 @@ function pulverizer({ max, min }) {
     const combOfA = combinations[a];
     const combOfB = combinations[b];
 
-    // rem = combOfA - q * (combOfB.x * max - combOfB.y * min)
-    // rem = combOfA - (b_x * max - b_y * min)
-    const b_x = q * combOfB.x;
-    const b_y = q * combOfB.y;
+    // rem = combOfA - q * (combOfB.x * max + combOfB.y * min)
+    // rem = combOfA + b_y * min + b_x * max
+    const b_x = -q * combOfB.x;
+    const b_y = -q * combOfB.y;
 
-    // rem = combOfA.x * max - combOfA.y * min - b_x * max + b_y * min
-    // rem = combOfA.x * max - b_x * max - combOfA.y * min + b_y * min
-    // rem = max * (combOfA.x - b_x) - min * (b_y - combOfA.y)
-    // rem = max * (combOfA.x - b_x) + min * (combOfA.y - b_y)
-    const combOfRem = { x: combOfA.x - b_x, y: combOfA.y - b_y };
+    // rem = combOfA.x * max + combOfA.y * min + b_y * min + b_x * max
+    // rem = combOfA.x * max + b_x * max + combOfA.y * min + b_y * min
+    // rem = max * (combOfA.x + b_x) + min * (combOfA.y + b_y)
+    const combOfRem = { x: combOfA.x + b_x, y: combOfA.y + b_y };
     combinations[rem] = combOfRem;
     [a, b] = [b, rem];
   }
@@ -217,7 +217,22 @@ function copyPrivateKeyToClipboard() {
   cb.write(JSON.stringify(key));
 }
 
+// This function is for testing purposes only
+function generateKeys() {
+  const keys = { publicKey: {}, privateKey: {} };
+
+  const p = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+  const q = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+  const n = p * q;
+  const e = calculateEncryptionKey(p, q);
+  keys.publicKey = { e, n };
+  const d = calculateDecryptionKey(e, p, q);
+  keys.privateKey = { d, n };
+  return keys;
+}
+
 module.exports = {
+  generateKeys,
   isPrime,
   chooseBase,
   generatePrime,
