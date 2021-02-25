@@ -86,7 +86,7 @@ function isPrime(n) {
   return true;
 }
 
-function generatePrime(min, max) {
+function generatePrime({ min, max }) {
   let n;
   while (true) {
     n = randint(min, max);
@@ -95,27 +95,32 @@ function generatePrime(min, max) {
 }
 
 function setBaseNumbers() {
-  document.querySelector('#p').value = generatePrime(window.minKeySize, window.maxKeySize);
-  document.querySelector('#q').value = generatePrime(window.minKeySize, window.maxKeySize);
+  document.querySelector('#p').value = generatePrime(
+    { min: window.minKeySize, max: window.maxKeySize },
+  );
+  document.querySelector('#q').value = generatePrime(
+    { min: window.minKeySize, max: window.maxKeySize },
+  );
   document.querySelector('#n').value = p * q;
 }
 
-function gcd(max, min) {
+
+function gcd({ max, min }) {
   if (min === 0) return max;
-  return gcd(min, max % min);
+  return gcd({ max: min, min: max % min });
 }
 
 function coprime(a, b) {
-  const max, min = a > b ? [a, b] : [b, a];
-  return gcd(max, min) === 1;
+  const [max, min] = a > b ? [a, b] : [b, a];
+  return gcd({ max, min }) === 1;
 }
 
 function calculateEncryptionKey(p, q) {
-  const totient_of_n = (p - 1) * (q - 1);
+  const totientOfN = (p - 1) * (q - 1);
   let e;
   while (true) {
-    e = randint(2, totient_of_n - 1);
-    if (coprime(e, totient_of_n)) return e;
+    e = randint(2, totientOfN - 1);
+    if (coprime(e, totientOfN)) return e;
   }
 }
 
@@ -129,9 +134,8 @@ function setPublicKey() {
 }
 
 function calculateDecryptionKey(e, p, q) {
-  const totient_of_n = (p - 1) * (q - 1);
-  const res = pulverizer(e, totient_of_n);
-  return res.algo;
+  const totientOfN = (p - 1) * (q - 1);
+  return pulverizer({ max: totientOfN, min: e }).x;
 }
 
 function setPrivateKey() {
