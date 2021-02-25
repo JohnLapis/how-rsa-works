@@ -4,6 +4,7 @@ title: How RSA works
 ---
 {% include bootstrap.html %}
 {% include mathjax.html %}
+{% include rsa.html %}
 
 <div id="slides" style="display: none;">
 
