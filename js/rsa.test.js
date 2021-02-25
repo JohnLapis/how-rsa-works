@@ -11,7 +11,6 @@ import {
 } from './rsa';
 
 it('isPrime', () => {
-  // fs.readFileSync(process.cswd())
   fs.readFileSync('./first_999_primes.txt', { encoding: 'utf-8' })
     .split('\n').slice(0, 5).forEach((prime) => {
       expect(isPrime(Number(prime))).toBe(true);
