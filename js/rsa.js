@@ -106,41 +106,21 @@ function setBaseNumbers() {
   document.querySelector('#n').value = p * q;
 }
 
-function pulverizer({ max, min }) {
+function pulverizer({ max: a, min: b }) {
   /* Calculates gcd of max and min and returns when remainder equals stop.
    *
    * Based on a*x + b*y = gcd(max, min), the return object is {x, y, gcd}.
    */
-  let [a, b] = [max, min];
-  // key = x*max + y*min
-  const combinations = { [max]: { x: 1, y: 0 }, [min]: { x: 0, y: 1 } };
-  while (true) {
-    // rem =  a - q*b
-    const q = Math.floor(a / b);
-    const rem = a % b;
-
-    if (rem === 0) {
-      // gcd(a,b) is the smallest linear combination of a and b
-      const lastComb = combinations[b];
-      return { gcd: b, x: lastComb.x, y: lastComb.y };
-    }
-
-    // rem = combOfA - q * combOfB
-    const combOfA = combinations[a];
-    const combOfB = combinations[b];
-
-    // rem = combOfA - q * (combOfB.x * max + combOfB.y * min)
-    // rem = combOfA + b_y * min + b_x * max
-    const b_x = -q * combOfB.x;
-    const b_y = -q * combOfB.y;
-
-    // rem = combOfA.x * max + combOfA.y * min + b_y * min + b_x * max
-    // rem = combOfA.x * max + b_x * max + combOfA.y * min + b_y * min
-    // rem = max * (combOfA.x + b_x) + min * (combOfA.y + b_y)
-    const combOfRem = { x: combOfA.x + b_x, y: combOfA.y + b_y };
-    combinations[rem] = combOfRem;
-    [a, b] = [b, rem];
+  let q;
+  // a = a*x0 + b*y0         b = a*x1 + b*y1
+  let [x0, y0, x1, y1] = [1, 0, 0, 1];
+  while (b !== 0) {
+    [q, b, a] = [Math.floor(a / b), a % b, b];
+    [x0, x1] = [x1 - q * x0, x0];
+    [y0, y1] = [y1 - q * y0, y0];
   }
+
+  return {gcd: a, x: x1, y: y1};
 }
 
 function gcd({ max, min }) {
