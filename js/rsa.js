@@ -1,6 +1,8 @@
 window = {};
+// MAX_SAFE_VALUE is 2 ** 53
+// totientOfN has to be within this range i's converted into Int.
 window.minPrimeSize = 2 ** 10;
-window.maxPrimeSize = 2 ** 14; // MAX_SAFE_VALUE is 2 ** 53
+window.maxPrimeSize = 2 ** 14;
 
 function isInt(n) {
   return Math.floor(n) - n === 0;
