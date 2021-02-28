@@ -8,13 +8,13 @@ function isInt(n) {
 
 // max and min inclusive
 function randint(min, max) {
-  console.assert(min <= max, 'First argument must be at most second argument.');
+  if (min > max) throw Error('First argument must be at most second argument.');
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
 function factorOutBy(n, factor) {
-  console.assert(factor > 1 && isInt(factor), 'Factor must be a positive integer greater than 1.');
-  console.assert(n > 1 && isInt(n), 'n must be a positive integer greater than 1.');
+  if (factor <= 1 || !isInt(factor)) throw Error('Factor must be a positive integer greater than 1.');
+  if (n <= 1 || !isInt(n)) throw Error('n must be a positive integer greater than 1.');
 
   let rest;
   let exponent = 0;
@@ -50,7 +50,7 @@ function isPrime(n) {
    * accuracy = 4 ** (-40) vezesassim 1023 bits
    * accuracy = um numero
    */
-  console.assert(isInt(n), 'n must be an integer.');
+  if (!isInt(n)) throw Error('n must be an integer.');
 
   if (n === 2) return true;
   if (n % 2 === 0) return false;
