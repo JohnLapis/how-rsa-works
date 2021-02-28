@@ -106,7 +106,7 @@ function setBaseNumbers() {
   document.querySelector('#n').value = p * q;
 }
 
-function pulverizer({ max: a, min: b }) {
+function pulverizer(a, b) {
   /* Calculates gcd of max and min and returns when remainder equals stop.
    *
    * Based on a*x + b*y = gcd(max, min), the return object is {x, y, gcd}.
@@ -120,17 +120,16 @@ function pulverizer({ max: a, min: b }) {
     [y0, y1] = [y1, y0 - q * y1];
   }
 
-  return {gcd: a, x: x0, y: y0};
+  return { gcd: a, x: x0, y: y0 };
 }
 
-function gcd({ max, min }) {
-  if (min === 0) return max;
-  return gcd({ max: min, min: max % min });
+function gcd(a, b) {
+  if (b === 0) return a;
+  return gcd(b, a % b);
 }
 
 function coprime(a, b) {
-  const [max, min] = a > b ? [a, b] : [b, a];
-  return gcd({ max, min }) === 1;
+  return gcd(a, b) === 1;
 }
 
 function calculateEncryptionKey(p, q) {
@@ -155,7 +154,7 @@ function calculateDecryptionKey(e, p, q) {
   const totientOfN = (p - 1) * (q - 1);
   // Since 1 = d*e - k*tot(n), pulverizer(tot(n), e) returns {gcd: 1, x: -k, y: d}
   // tot(n) > e implies decryption key is y
-  return pulverizer({ max: totientOfN, min: e }).y;
+  return pulverizer(totientOfN, e).y;
 }
 
 function setPrivateKey() {
