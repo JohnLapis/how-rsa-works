@@ -22,11 +22,11 @@ it('isPrime', () => {
 
 it('pulverizer', () => {
   fc.assert(fc.property(
-    fc.nat(2**26),
-    fc.nat(2**26),
+    fc.bigInt(0n, 2n**26n),
+    fc.bigInt(0n, 2n**26n),
     (a, b) => {
       const result = pulverizer(a,b);
-      expect(result.gcd - a * result.x - b * result.y).toBe(0);
+      expect(result.gcd - a * result.x - b * result.y).toBe(0n);
     },
   ));
 });

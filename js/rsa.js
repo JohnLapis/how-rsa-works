@@ -1,5 +1,5 @@
 window = {};
-// MAX_SAFE_VALUE is 2 ** 53
+// MAX_SAFE_INTEGER is 2 ** 53
 // totientOfN has to be within this range i's converted into Int.
 window.minPrimeSize = 2 ** 10;
 window.maxPrimeSize = 2 ** 14;
@@ -92,7 +92,7 @@ function generatePrime({ min, max }) {
   let n;
   while (true) {
     n = randint(min, max);
-    if (isPrime(n)) return n;
+    if (isPrime(n)) return BigInt(n);
   }
 }
 
@@ -115,9 +115,10 @@ function pulverizer(a, b) {
    */
   let q;
   // a = a*x0 + b*y0         b = a*x1 + b*y1
-  let [x0, y0, x1, y1] = [1, 0, 0, 1];
-  while (b !== 0) {
-    [q, b, a] = [Math.floor(a / b), a % b, b];
+  let [x0, y0, x1, y1] = [1n, 0n, 0n, 1n];
+  while (b !== 0n) {
+    // Division of BigInts rounds to lower integer
+    [q, b, a] = [a / b, a % b, b];
     [x0, x1] = [x1, x0 - q * x1];
     [y0, y1] = [y1, y0 - q * y1];
   }
@@ -135,11 +136,11 @@ function coprime(a, b) {
 }
 
 function calculateEncryptionKey(p, q) {
-  const totientOfN = (p - 1) * (q - 1);
+  const totientOfN = Number((p - 1n) * (q - 1n));
   let e;
   while (true) {
     e = randint(2, totientOfN - 1);
-    if (coprime(e, totientOfN)) return e;
+    if (coprime(e, totientOfN)) return BigInt(e);
   }
 }
 
@@ -153,7 +154,7 @@ function setPublicKey() {
 }
 
 function calculateDecryptionKey(e, p, q) {
-  const totientOfN = (p - 1) * (q - 1);
+  const totientOfN = (p - 1n) * (q - 1n);
   // Since 1 = d*e - k*tot(n), pulverizer(tot(n), e) returns {gcd: 1, x: -k, y: d}
   // tot(n) > e implies decryption key is y
   return pulverizer(totientOfN, e).y;
@@ -165,7 +166,8 @@ function setPrivateKey() {
   const e = document.querySelector('#e').value;
   document.querySelector('#d').value = calculateDecryptionKey(e, p, q);
 
-  const n = document.querySelector('#q').value;
+  const d = BigInt(document.querySelector('#d').value);
+  const n = BigInt(document.querySelector('#n').value);
   window.privateKey = { d, n };
 }
 
@@ -218,10 +220,10 @@ function generateKeys() {
   const max = window.maxPrimeSize;
   const p = generatePrime({ min, max });
   const q = generatePrime({ min, max });
-  const n = BigInt(p * q);
-  const e = BigInt(calculateEncryptionKey(p, q));
+  const n = p * q;
+  const e = calculateEncryptionKey(p, q);
   keys.publicKey = { e, n };
-  const d = BigInt(calculateDecryptionKey(e, p, q));
+  const d = calculateDecryptionKey(e, p, q);
   keys.privateKey = { d, n };
   return keys;
 }
