@@ -1,6 +1,6 @@
 window = {};
-window.minKeySize = 2 ** 10;
-window.maxKeySize = 2 ** 14; // MAX_SAFE_VALUE is 2 ** 53
+window.minPrimeSize = 2 ** 10;
+window.maxPrimeSize = 2 ** 14; // MAX_SAFE_VALUE is 2 ** 53
 
 function isInt(n) {
   return Math.floor(n) - n === 0;
@@ -98,8 +98,8 @@ function setBaseNumbers() {
   let p;
   let q;
   do {
-    p = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
-    q = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+    p = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
+    q = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
   } while (p === q);
   document.querySelector('#p').value = p;
   document.querySelector('#q').value = q;
@@ -200,8 +200,8 @@ function copyPrivateKeyToClipboard() {
 function generateKeys() {
   const keys = { publicKey: {}, privateKey: {} };
 
-  const p = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
-  const q = generatePrime({ min: window.minKeySize, max: window.maxKeySize });
+  const p = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
+  const q = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
   const n = p * q;
   const e = calculateEncryptionKey(p, q);
   keys.publicKey = { e, n };
