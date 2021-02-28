@@ -212,12 +212,14 @@ function copyPrivateKeyToClipboard() {
 function generateKeys() {
   const keys = { publicKey: {}, privateKey: {} };
 
-  const p = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
-  const q = generatePrime({ min: window.minPrimeSize, max: window.maxPrimeSize });
-  const n = p * q;
-  const e = calculateEncryptionKey(p, q);
+  const min = window.minPrimeSize;
+  const max = window.maxPrimeSize;
+  const p = generatePrime({ min, max });
+  const q = generatePrime({ min, max });
+  const n = BigInt(p * q);
+  const e = BigInt(calculateEncryptionKey(p, q));
   keys.publicKey = { e, n };
-  const d = calculateDecryptionKey(e, p, q);
+  const d = BigInt(calculateDecryptionKey(e, p, q));
   keys.privateKey = { d, n };
   return keys;
 }
