@@ -1,6 +1,7 @@
 import fs from 'fs';
 import fc from 'fast-check';
 import {
+  pulverizer,
   isPrime,
   generateKeys,
   coprime,
@@ -19,23 +20,29 @@ it('isPrime', () => {
     });
 });
 
-it.each([
-
-])('calculateEncryptionKey', (p, q, expected) => {
-  const e = calculateEncryptionKey(p, q);
-  expect(e).toEqual(expected);
+it('pulverizer', () => {
+  fc.assert(fc.property(
+    fc.nat(2**26),
+    fc.nat(2**26),
+    (a, b) => {
+      const result = pulverizer(a,b);
+      expect(result.gcd - a * result.x - b * result.y).toBe(0);
+    },
+  ));
 });
 
 it('decryption key should be multiplicative inverse of encryption key', () => {
   fc.assert(fc.property(
-    fc.nat(2**14).filter((n) => isPrime(n)),
-    fc.nat(2**14).filter((n) => isPrime(n)),
+    fc.integer(3, 2**26).filter((n) => isPrime(n)),
+    fc.integer(3, 2**26).filter((n) => isPrime(n)),
     (p, q) => {
       fc.pre(p !== q);
+      const totientOfN = (p - 1) * (q - 1);
       const e = calculateEncryptionKey(p, q);
       const d = calculateDecryptionKey(e, p, q);
-      const totientOfN = (p - 1) * (q - 1);
-      expect(((d * e) - 1) % totientOfN === 0).toBe(true);
+      const k = -pulverizer(totientOfN, e).x;
+      // 1 = d*e - k*tot(n) implies (d*e - 1) / k = tot(n)
+      expect(Math.round((d * e - 1) / k)).toEqual(totientOfN);
     },
   ));
 });

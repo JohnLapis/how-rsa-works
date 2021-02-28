@@ -116,11 +116,11 @@ function pulverizer({ max: a, min: b }) {
   let [x0, y0, x1, y1] = [1, 0, 0, 1];
   while (b !== 0) {
     [q, b, a] = [Math.floor(a / b), a % b, b];
-    [x0, x1] = [x1 - q * x0, x0];
-    [y0, y1] = [y1 - q * y0, y0];
+    [x0, x1] = [x1, x0 - q * x1];
+    [y0, y1] = [y1, y0 - q * y1];
   }
 
-  return {gcd: a, x: x1, y: y1};
+  return {gcd: a, x: x0, y: y0};
 }
 
 function gcd({ max, min }) {
@@ -221,4 +221,5 @@ module.exports = {
   calculateDecryptionKey,
   encrypt,
   decrypt,
+  pulverizer,
 };
