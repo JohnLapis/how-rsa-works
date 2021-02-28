@@ -167,6 +167,18 @@ function setPrivateKey() {
   window.privateKey = { d, n };
 }
 
+function modular_exp(base, exp, mod) {
+  if (mod === 1n) return 0n;
+  let result = 1n;
+  for (let i = 0; i < exp; i++) {
+    result = result * base % mod;
+  }
+  return result;
+}
+
+
+}
+
 function encrypt(plaintext, key) {
   const decodedPlaintext = decode(plaintext);
   return (decodedPlaintext ** key.e) % key.n;
